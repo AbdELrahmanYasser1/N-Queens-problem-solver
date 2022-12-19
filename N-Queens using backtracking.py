@@ -113,7 +113,7 @@ def run(n):
 
 
     #Returns a square board of nxn dimension
-    board = get_board👎
+    board = get_board
 
     #Empty list of all possible solutions
 
@@ -164,4 +164,4 @@ btn.config(command=lambda: [restart_program(), play()])
 def restart_program():
     for label in board.grid_slaves():
         label.grid_forget()
-root.mainloop()
+root.mainloop() 
