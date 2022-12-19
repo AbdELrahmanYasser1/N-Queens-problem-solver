@@ -1,1 +1,1 @@
-# 
+# N-Qeens problem solver
