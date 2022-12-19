@@ -5,7 +5,7 @@ import random
 
 root = Tk()
 root.title("N-Queens Problem Solver")
-root.config(bg='#106b91')
+root.config(bg='#116562')
 
 style = ttk.Style()
 style.theme_use('classic')
@@ -19,7 +19,7 @@ board.config(width=0, height=0, relief=RIDGE)
 
 # -:CODE:- #
 def run(NQueen):
-    maxFitness = (NQueen * (NQueen - 1)) / 2 # 3 1 4 2
+    maxFitness = (NQueen * (NQueen - 1)) / 2 # 1 1 1 1 
     population = [generateChromosome(NQueen) for _ in range(100)]
 
     generation = 1
@@ -35,7 +35,7 @@ def run(NQueen):
             print(f"The number of generation is : {generation}")
             print("-----------------------------------")
             return chrom
-
+            
 
 # -: Algorithm :- #
 
@@ -43,7 +43,7 @@ def generateChromosome(NQueen):
     List = []
     for _ in range(NQueen): 
         List.append(random.randint(1, NQueen))
-    return List
+    return List # 
 
 
 def mutation(chromosome):
@@ -59,7 +59,7 @@ def crossover(chromosomex, chromosomey):
     # reproduce new chromosome from two Chromosomes.
     n = len(chromosomex)
     index = random.randint(0, n - 1)
-    return chromosomex[0:index] + chromosomey[index:n] # 3 
+    return chromosomex[0:index] + chromosomey[index:n]  
 
 
 def fitness(chromosome, maxFitness):
@@ -104,7 +104,7 @@ def fitness(chromosome, maxFitness):
             column += 1
             row -= 1
     #
-    return maxFitness - (horizontal_collisions + left_diagonal + right_diagonal)
+    return maxFitness - (horizontal_collisions + left_diagonal + right_diagonal) # 
 
 
 def probability(chromosome, fitness, maxFitness):
@@ -119,7 +119,7 @@ def randomChromosome(population, probabilities):
 
     prop = random.uniform(0, sum)  # random probability
     prev = 0
-    for a, b in zip(population, probabilities):
+    for a, b in zip(population, probabilities): 
         if prev + b >= prop:
             return a  # chromosome with hiegher probability
         prev += b  # sum of all previous probabilities
@@ -136,6 +136,7 @@ def Differential(population, fitness, maxFitness):
 
         child = mutation(x)
         child = crossover(child, y)
+        
 
         if fitness(child, maxFitness) < fitness(x, maxFitness): # selection
             child = x
@@ -196,8 +197,8 @@ def play():
     elif (size.isnumeric() != True):
         msg = 'error, please enter number not else'
         tkinter.messagebox.showinfo('error', msg)
-    elif (int(size) < 4):
-        msg = 'Sorry, The minimum size is 4x4'
+    elif (int(size) < 4 and int(size) != 1):
+        msg = 'Sorry, no solution'
         tkinter.messagebox.showinfo('error', msg)
     else:
         chrome = run(int(size))
